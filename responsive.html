@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 3, Responsive landing page</title>
+    <link href="public/style.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 text-gray-800 font-sans pt-16">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-black p-4 shadow-md fixed top-0 w-full">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-xl font-bold text-white">Day 3, Responsive landing page</div>
+            <div class="md:hidden">
+                <button id="menu-button" class="text-white focus:outline-none">
+                    <!-- Simple hamburger menu icon -->
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <ul id="nav-links" class="hidden md:flex space-x-4">
+                <li><a href="#hero" class="text-gray-300 hover:text-white">Home</a></li>
+                <li><a href="#features" class="text-gray-300 hover:text-white">Features</a></li>
+                <li><a href="#about" class="text-gray-300 hover:text-white">About</a></li>
+                <li><a href="#contact" class="text-gray-300 hover:text-white">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="bg-blue-500 text-white py-20 text-center">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl font-bold mb-4">Learn Tailwind CSS 3 Easily</h1>
+            <p class="text-lg mb-6">Master responsive design and build stunning websites faster using Tailwind CSS.</p>
+            <a href="#features" class="bg-white text-blue-500 py-2 px-4 rounded hover:bg-gray-100">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gray-100 text-center">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-blue-500 mb-8">Features of Tailwind CSS 3</h2>
+            <div class="grid gap-8 md:grid-cols-3">
+                <div class="p-4 bg-slate-300 shadow-md rounded">
+                    <img src="public/img/utility.PNG" alt="Feature 1" class="mx-auto mb-4 h-40">
+                    <h3 class="text-xl font-semibold mb-2">Utility-First Framework</h3>
+                    <p>Use pre-defined utility classes to build any design directly in your HTML.</p>
+                </div>
+                <div class="p-4 bg-slate-300 shadow-md rounded">
+                    <img src="public/img/responsive.png" alt="Feature 2" class="mx-auto mb-4 h-40">
+                    <h3 class="text-xl font-semibold mb-2">Responsive Design</h3>
+                    <p>Create responsive layouts quickly with built-in breakpoints.</p>
+                </div>
+                <div class="p-4 bg-slate-300 shadow-md rounded">
+                    <img src="public/img/customisable.PNG" alt="Feature 3" class="mx-auto mb-4 h-40">
+                    <h3 class="text-xl font-semibold mb-2">Customizable</h3>
+                    <p>Easily customize the design system to fit your brand's needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-slate-200 text-center">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-blue-500 mb-4">Why Learn Tailwind CSS 3?</h2>
+            <p class="text-lg max-w-2xl mx-auto">Tailwind CSS makes web development fast and easy with utility classes. No need to write custom CSS for every element, you can quickly create responsive, consistent designs directly in your HTML code.</p>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="contact" class="bg-blue-500 text-white py-10 text-center">
+        <div class="container mx-auto px-4">
+            <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+            <p>Email: <a href="mailto:info@tailwindlearn.com" class="underline">info@tailwindlearn.com</a></p>
+            <p class="mt-4">&copy; 2024 Tailwind Learn. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu Toggle -->
+    <script>
+        const menuButton = document.getElementById('menu-button');
+        const navLinks = document.getElementById('nav-links');
+
+        menuButton.addEventListener('click', () => {
+            navLinks.classList.toggle('hidden');
+        });
+    </script>
+
+</body>
+
+</html>
