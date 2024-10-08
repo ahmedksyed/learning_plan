@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 3, Responsive landing page</title>
+    <link href="public/style.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 text-gray-800 font-sans pt-16">
+    Please look at console for output
+    <!-- JavaScript Core concepts -->
+    <script>
+        //  - Variables, let/const vs var
+
+        var a = 5; // global scope
+        let b = 10; // local scope
+        const c = 15;
+        {
+            var a = 6;
+            let b = 11;
+            const c = 16;
+            console.log('local a ' + a); // 6
+            console.log('local b ' + b); // 11
+            console.log('local c ' + c); // 15
+        }
+
+        console.log('global a ' + a); // 6
+        console.log('global b ' + b); // 10
+        console.log('global c ' + c); // 15
+
+        // - Functions
+        function onePlusAvg(x, y) {
+            console.log('done');
+            return 1 + (x + y) / 2;
+        }
+        let num1 = 1;
+        let num2 = 2;
+        let num3 = 3;
+        console.log('1 plus average of ' + num1 + ' and ' + num2 + ' is ', onePlusAvg(num1, num2));
+        console.log('1 plus average of ' + num2 + ' and ' + num3 + ' is ', onePlusAvg(num2, num3));
+        console.log('1 plus average of ' + num3 + ' and ' + num1 + ' is ', onePlusAvg(num3, num1));
+
+        // Arrow functions
+        const sayHello = () => console.log('Hello');
+        sayHello();
+
+        // Array method map
+        let arr = [45, 23, 12, 34, 56, 78, 90];
+        let new_arr = arr.map((value, index, array) => {
+            console.log(value, index, array);
+            return value + 1;
+        })
+        console.log(new_arr);
+
+        // Array method filter
+        let arr2 = [45, 23, 12, 34, 56, 78, 90];
+        let new_arr2 = arr2.filter((value, index, array) => {
+            console.log(value, index, array);
+            return value > 40;
+        })
+        console.log(new_arr2);
+
+        // Array reduce method
+        let arr3 = [45, 23, 12, 34, 56, 78, 90];
+        let new_arr3 = arr3.reduce((accumulator, currentValue, index, array) => {
+            console.log(accumulator, currentValue, index, array);
+            return accumulator + currentValue;
+        })
+        console.log(new_arr3);
+
+        // Array method find
+        let arr4 = [45, 23, 12, 34, 56, 78, 90];
+        let new_arr4 = arr4.find((value, index, array) => {
+
+        })
+
+        // Destructuring
+        let arr5 = [45, 23, 12, 34, 56, 78, 90];
+        let [num4, num5, num6, ...rest] = arr5;
+        console.log(num4, num5, num6, rest);
+
+        // Spread operator
+        let arr6 = [45, 23, 12, 34, 56, 78, 90];
+        let obj = { ...arr6 };
+        console.log(obj);
+
+        // Promise
+        let promise = new Promise((resolve, reject) => {
+            alert('I am a promise');
+            resolve(56);
+        })
+
+        console.log('Hello 1');
+        setTimeout(function () {
+            console.log('Hello 2 in 2 seconds');
+        }, 2000);
+        console.log('Hello 3');
+        console.log(promise);   
+
+        // Async
+        async function hello() {
+            return 'Hello';
+        }
+        hello().then((value) => {
+            alert(value);
+        })
+
+        // Await
+        async function weather() {
+            let delhiWeather = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve('27 degree');
+                }, 2000);
+            })
+            let bangaloreWeather = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve('21 degree');
+                }, 5000);
+            })
+            
+            console.log('Fetching Delhi weather please wait...');
+            let delhiW = await delhiWeather;
+            console.log('Delhi weather is ' + delhiW);
+            
+            console.log('Fetching Banglore weather please wait...');
+            let bangaloreW = await bangaloreWeather;
+            console.log('Banglore weather is ' + bangaloreW);
+
+            return [delhiW, bangaloreW];
+        }
+
+        console.log("welcome to weather control room")
+        let w = weather();
+        w.then((value) => {
+            console.log(value);
+        })
+        console.log(w);
+
+        //DOM manipulation basics
+
+        console.log('document.body is ');
+        console.log(document.body);
+        document.body.style.backgroundColor = 'red';
+    </script>
+
+</body>
+
+</html>
