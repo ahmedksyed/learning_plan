@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 5, JavaScript ES6+ Crash Course</title>
+    <link href="public/style.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 text-gray-800 font-sans pt-16">
+    Please look at console for output
+    <!-- JavaScript ES6+ Crash Course -->
+    <script>
+        //  - Variables, let/const vs var
+        // var = Global Scope
+        // let = Block Scope
+        // const = Block Scope, but cannot be reassigned
+
+        function sayHello() {
+            for (var i = 0; i < 5; i++) {
+                console.log(i);
+            }
+            console.log(i);
+        }
+        sayHello();
+
+        function sayHello2() {
+            for (let i = 0; i < 5; i++) {
+                console.log(i);
+            }
+            // console.log(i); // ReferenceError: i is not defined
+        }
+
+        const x = 10;
+        // x = 20; // TypeError: Assignment to constant variable.
+        console.log(x);
+
+        // this keyword
+        const person = {
+            name: 'John',
+            walk () {
+                console.log(this);
+            }
+        }
+        person.walk();
+        const walk = person.walk;
+        walk();
+
+        const square = number => number * number;
+        console.log(square(5));
+
+        // Class
+        class Person {
+            constructor(name){
+                this.name=name;
+            }
+            walk(){
+                console.log(this.name + ' is walking');
+            }
+        }
+
+        const john = new Person('John');
+        john.walk();
+
+    </script>
+
+</body>
+
+</html>
