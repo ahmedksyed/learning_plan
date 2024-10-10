@@ -8,31 +8,43 @@
     <link href="public/style.css" rel="stylesheet">
 </head>
 
-<body class="bg-gray-100 text-gray-800 font-sans pt-16">
+<body
+    class="bg-gray-100 text-gray-800 font-sans pt-16 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
 
     <!-- Navigation Bar -->
-    <nav class="bg-black p-4 shadow-md fixed top-0 w-full">
+    <nav class="bg-white p-4 shadow-md fixed top-0 w-full z-10 transition-colors duration-300 dark:bg-gray-800">
         <div class="container mx-auto flex justify-between items-center">
-            <div class="text-xl font-bold text-white">Day 3, Responsive landing page</div>
+            <div class="text-xl font-bold text-gray-500">Day 3, Responsive landing page</div>
             <div class="md:hidden">
-                <button id="menu-button" class="text-white focus:outline-none">
+                <button id="menu-button" class="text-gray-500 focus:outline-none">
                     <!-- Simple hamburger menu icon -->
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
             </div>
             <ul id="nav-links" class="hidden md:flex space-x-4">
-                <li><a href="#hero" class="text-gray-300 hover:text-white">Home</a></li>
-                <li><a href="#features" class="text-gray-300 hover:text-white">Features</a></li>
-                <li><a href="#about" class="text-gray-300 hover:text-white">About</a></li>
-                <li><a href="#contact" class="text-gray-300 hover:text-white">Contact</a></li>
+                <li><a href="#hero" class="nav-link  text-gray-500 hover:text-gray-400">Home</a></li>
+                <li><a href="#features" class="nav-link  text-gray-500 hover:text-gray-400">Features</a></li>
+                <li><a href="#about" class="nav-link  text-gray-500 hover:text-gray-400">About</a></li>
+                <li><a href="#contact" class="nav-link  text-gray-500 hover:text-gray-400">Contact</a></li>
             </ul>
+
+            <!-- Dark Mode Toggle -->
+            <label class="inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="dark-mode-toggle" class="sr-only peer">
+                <div
+                    class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-black">
+                </div>
+                <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Dark mode</span>
+            </label>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="bg-blue-500 text-white py-20 text-center">
+    <section id="hero" class="bg-blue-500 text-white py-20 text-center transition-colors duration-300 dark:bg-gray-700">
         <div class="container mx-auto px-4">
             <h1 class="text-4xl font-bold mb-4">Learn Tailwind CSS 3 Easily</h1>
             <p class="text-lg mb-6">Master responsive design and build stunning websites faster using Tailwind CSS.</p>
@@ -41,21 +53,22 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 bg-gray-100 text-center">
+    <section id="features"
+        class="py-20 bg-gray-100 text-center transition-colors duration-300 dark:bg-gray-800 dark:text-gray-100">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-blue-500 mb-8">Features of Tailwind CSS 3</h2>
             <div class="grid gap-8 md:grid-cols-3">
-                <div class="p-4 bg-slate-300 shadow-md rounded">
+                <div class="p-4 bg-slate-300 shadow-md rounded dark:bg-gray-700">
                     <img src="public/img/utility.PNG" alt="Feature 1" class="mx-auto mb-4 h-40">
                     <h3 class="text-xl font-semibold mb-2">Utility-First Framework</h3>
                     <p>Use pre-defined utility classes to build any design directly in your HTML.</p>
                 </div>
-                <div class="p-4 bg-slate-300 shadow-md rounded">
+                <div class="p-4 bg-slate-300 shadow-md rounded dark:bg-gray-700">
                     <img src="public/img/responsive.png" alt="Feature 2" class="mx-auto mb-4 h-40">
                     <h3 class="text-xl font-semibold mb-2">Responsive Design</h3>
                     <p>Create responsive layouts quickly with built-in breakpoints.</p>
                 </div>
-                <div class="p-4 bg-slate-300 shadow-md rounded">
+                <div class="p-4 bg-slate-300 shadow-md rounded dark:bg-gray-700">
                     <img src="public/img/customisable.PNG" alt="Feature 3" class="mx-auto mb-4 h-40">
                     <h3 class="text-xl font-semibold mb-2">Customizable</h3>
                     <p>Easily customize the design system to fit your brand's needs.</p>
@@ -65,29 +78,137 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-slate-200 text-center">
-        <div class="container mx-auto px-4">
+    <section id="about" class="py-20 bg-slate-200 text-center transition-colors duration-300 dark:bg-gray-900">
+        <div class="container mx-auto px-4 ">
             <h2 class="text-3xl font-bold text-blue-500 mb-4">Why Learn Tailwind CSS 3?</h2>
-            <p class="text-lg max-w-2xl mx-auto">Tailwind CSS makes web development fast and easy with utility classes. No need to write custom CSS for every element, you can quickly create responsive, consistent designs directly in your HTML code.</p>
+            <p class="text-lg max-w-2xl mx-auto">Tailwind CSS makes web development fast and easy with utility classes.
+                No need to write custom CSS for every element, you can quickly create responsive, consistent designs
+                directly in your HTML code.</p>
         </div>
     </section>
 
-    <!-- Footer Section -->
-    <footer id="contact" class="bg-blue-500 text-white py-10 text-center">
+    <!-- Footer Section with Contact Form -->
+    <footer id="contact"
+        class="bg-blue-500 text-white py-10 text-center transition-colors duration-300 dark:bg-gray-700 dark:text-gray-100">
         <div class="container mx-auto px-4">
             <h3 class="text-lg font-bold mb-4">Contact Us</h3>
-            <p>Email: <a href="mailto:info@tailwindlearn.com" class="underline">info@tailwindlearn.com</a></p>
-            <p class="mt-4">&copy; 2024 Tailwind Learn. All rights reserved.</p>
+
+            <!-- Contact Form -->
+            <form id="contact-form" class="max-w-md mx-auto">
+                <div class="mb-4">
+                    <label for="name" class="block text-sm font-medium mb-2">Name</label>
+                    <input type="text" id="name" name="name" class="w-full px-4 py-2 rounded text-black"
+                        placeholder="Your Name">
+                    <small id="name-error" class="text-red-500 hidden">Name is required</small>
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium mb-2">Email</label>
+                    <input type="email" id="email" name="email" class="w-full px-4 py-2 rounded text-black"
+                        placeholder="Your Email">
+                    <small id="email-error" class="text-red-500 hidden">Valid email is required</small>
+                </div>
+                <div class="mb-4">
+                    <label for="message" class="block text-sm font-medium mb-2">Message</label>
+                    <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 rounded text-black"
+                        placeholder="Your Message"></textarea>
+                    <small id="message-error" class="text-red-500 hidden">Message is required</small>
+                </div>
+                <button type="submit"
+                    class="bg-white text-blue-500 py-2 px-4 rounded hover:bg-gray-100 dark:bg-gray-600 dark:text-white">Submit</button>
+            </form>
+
+            <p class="mt-6">&copy; 2024 Tailwind Learn. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- JavaScript for Mobile Menu Toggle -->
+    <!-- JavaScript for Mobile Menu Toggle, Dark Mode, and Smooth Scroll -->
     <script>
         const menuButton = document.getElementById('menu-button');
         const navLinks = document.getElementById('nav-links');
+        const htmlElement = document.documentElement;
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
 
+        // Toggle the mobile menu visibility
         menuButton.addEventListener('click', () => {
             navLinks.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Check for existing dark mode preference in localStorage
+        if (localStorage.getItem('theme') === 'dark') {
+            htmlElement.classList.add('dark');
+            darkModeToggle.checked = true;
+        }
+
+        // Toggle dark mode on button click and save preference to localStorage
+        darkModeToggle.addEventListener('change', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // JavaScript validation for contact form
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent form submission until validated
+
+            let isValid = true;
+
+            // Name validation
+            const name = document.getElementById('name').value.trim();
+            const nameError = document.getElementById('name-error');
+            if (name === '') {
+                nameError.classList.remove('hidden');
+                isValid = false;
+            } else {
+                nameError.classList.add('hidden');
+            }
+
+            // Email validation
+            const email = document.getElementById('email').value.trim();
+            const emailError = document.getElementById('email-error');
+            const emailPattern = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                emailError.classList.remove('hidden');
+                isValid = false;
+            } else {
+                emailError.classList.add('hidden');
+            }
+
+            // Message validation
+            const message = document.getElementById('message').value.trim();
+            const messageError = document.getElementById('message-error');
+            if (message === '') {
+                messageError.classList.remove('hidden');
+                isValid = false;
+            } else {
+                messageError.classList.add('hidden');
+            }
+
+            // Debugging log
+            console.log('Form validation:', { isValid, name, email, message });
+
+            // If all fields are valid, display success message
+            if (isValid) {
+                alert('Form submitted successfully!');
+                // Optionally, you can clear the form after successful submission
+                contactForm.reset();
+            }
         });
     </script>
 
