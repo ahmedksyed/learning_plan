@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Dashboard</title>
+    <link rel="stylesheet" href="public/style.css">
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Main Container -->
+    <div class="container mx-auto mt-8 px-4">
+
+        <!-- Title, Search Bar, Sort, Filter, and Add Button in the same line -->
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-3xl font-semibold">Products</h1>
+            <div class="flex items-center w-full max-w-3xl">
+                <input id="searchInput" type="text" placeholder="Search by name, product category"
+                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+
+                <!-- Sort Dropdown -->
+                <select id="sortDropdown" class="m-2 px-4 py-2 border rounded-lg bg-white">
+                    <option value="default">Sort by Price</option>
+                    <option value="low-high">Low to High</option>
+                    <option value="high-low">High to Low</option>
+                </select>
+
+                <!-- Filter Dropdown -->
+                <select id="filterDropdown" class="m-2 px-4 py-2 border rounded-lg bg-white">
+                    <option value="all">Filter by Category</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Fashion">Fashion</option>
+                    <option value="Computers">Computers</option>
+                    <option value="Home Appliances">Home Appliances</option>
+                </select>
+
+                <button id="addProductBtn"
+                    class="bg-blue-500 text-white m-2 px-4 py-2 rounded-lg hover:bg-blue-600 text-nowrap">
+                    Add Product
+                </button>
+            </div>
+        </div>
+
+        <!-- Product Table -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white rounded-lg shadow-lg">
+                <thead>
+                    <tr class="bg-gray-200 text-gray-600 text-left text-sm">
+                        <th class="py-3 px-4">ID</th>
+                        <th class="py-3 px-4">Product Name</th>
+                        <th class="py-3 px-4">Price</th>
+                        <th class="py-3 px-4">Category</th>
+                        <th class="py-3 px-4">Order</th>
+                        <th class="py-3 px-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="productTableBody">
+                    <!-- Product rows will be injected here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination Controls -->
+        <div class="flex justify-end mt-4">
+            <button id="prevPage" class="bg-gray-300 px-3 py-1 rounded mr-2">Previous</button>
+            <button id="nextPage" class="bg-gray-300 px-3 py-1 rounded">Next</button>
+        </div>
+    </div>
+
+    <!-- Add/Edit Product Modal -->
+    <div id="productModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 id="modalTitle" class="text-xl font-semibold mb-4">Add Product</h2>
+            <form id="productForm">
+                <input type="hidden" id="productId">
+                <div class="mb-4">
+                    <label for="productName" class="block text-sm font-medium">Product Name</label>
+                    <input type="text" id="productName" class="w-full border px-4 py-2 rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label for="productPrice" class="block text-sm font-medium">Product Price</label>
+                    <input type="number" id="productPrice" class="w-full border px-4 py-2 rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label for="productCategory" class="block text-sm font-medium">Product Category</label>
+                    <input type="text" id="productCategory" class="w-full border px-4 py-2 rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label for="productOrder" class="block text-sm font-medium">Order</label>
+                    <input type="number" id="productOrder" class="w-full border px-4 py-2 rounded" required>
+                </div>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    Save Product
+                </button>
+                <button type="button" id="closeModal" class="ml-4 bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">
+                    Cancel
+                </button>
+            </form>
+        </div>
+    </div>
+    <!-- JavaScript -->
+    <script>
+        let products = [];
+        const productTableBody = document.getElementById('productTableBody');
+        const productModal = document.getElementById('productModal');
+        const productForm = document.getElementById('productForm');
+        const modalTitle = document.getElementById('modalTitle');
+        const productIdInput = document.getElementById('productId');
+        const productNameInput = document.getElementById('productName');
+        const productPriceInput = document.getElementById('productPrice');
+        const productCategoryInput = document.getElementById('productCategory');
+        const productOrderInput = document.getElementById('productOrder');
+        const addProductBtn = document.getElementById('addProductBtn');
+        const closeModal = document.getElementById('closeModal');
+        const searchInput = document.getElementById('searchInput');
+        const sortDropdown = document.getElementById('sortDropdown');
+        const filterDropdown = document.getElementById('filterDropdown');
+        const prevPage = document.getElementById('prevPage');
+        const nextPage = document.getElementById('nextPage');
+
+        let currentPage = 1;
+        const productsPerPage = 10;
+
+        // Mock API to Fetch Product Data
+        function fetchProducts() {
+            products = [
+                { id: 1, name: "Sony WH-1000XM4", price: 350, category: "Electronics", order: 1 },
+                { id: 2, name: "Apple MacBook Pro", price: 1200, category: "Computers", order: 2 },
+                { id: 3, name: "Adidas Ultraboost 21", price: 180, category: "Fashion", order: 3 },
+                { id: 4, name: "KitchenAid Stand Mixer", price: 450, category: "Home Appliances", order: 4 },
+                { id: 5, name: "Samsung Galaxy S21", price: 999, category: "Smartphones", order: 5 },
+                { id: 6, name: "Nike Air Max 270", price: 150, category: "Fashion", order: 6 },
+                { id: 7, name: "Dell XPS 13", price: 1300, category: "Computers", order: 7 },
+                { id: 8, name: "Sony Alpha A7 III", price: 2000, category: "Cameras", order: 8 },
+                { id: 9, name: "GoPro HERO9", price: 400, category: "Cameras", order: 9 },
+                { id: 10, name: "Instant Pot", price: 99, category: "Home Appliances", order: 10 },
+                { id: 11, name: "Bose SoundLink Revolve", price: 199, category: "Electronics", order: 11 },
+                { id: 12, name: "Oculus Quest 2", price: 299, category: "Gaming", order: 12 },
+                { id: 13, name: "LG OLED TV", price: 1400, category: "Home Entertainment", order: 13 },
+                { id: 14, name: "Amazon Echo Dot", price: 50, category: "Smart Home", order: 14 },
+                { id: 15, name: "Apple Watch Series 6", price: 400, category: "Wearables", order: 15 }
+            ];
+            displayProducts(products);
+        }
+
+        // Display Products in Table with Pagination
+        function displayProducts(productArray) {
+            productTableBody.innerHTML = '';
+            const start = (currentPage - 1) * productsPerPage;
+            const end = start + productsPerPage;
+            const paginatedProducts = productArray.slice(start, end);
+
+            paginatedProducts.forEach((product, index) => {
+                const row = document.createElement('tr');
+                row.className = index % 2 === 0 ? 'bg-white' : 'bg-gray-50'; // Add class based on index
+
+                row.innerHTML = `
+                <td class="border px-4 py-2">${product.id}</td>
+                <td class="border px-4 py-2">${product.name}</td>
+                <td class="border px-4 py-2">$${product.price}</td>
+                <td class="border px-4 py-2">${product.category}</td>
+                <td class="border px-4 py-2">${product.order}</td>
+                <td class="border px-4 py-2">
+                    <button class="text-blue-500 editProductBtn border px-2 py-1 rounded bg-blue-600 hover:bg-blue-400 text-white" data-id="${product.id}">Edit</button>
+                    <button class="text-red-500 deleteProductBtn px-2 py-1 rounded bg-red-600 hover:bg-red-400 text-white" data-id="${product.id}">Delete</button>
+                </td>
+            `;
+                productTableBody.appendChild(row);
+            });
+        }
+
+        // Search Products
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredProducts = products.filter(product =>
+                product.name.toLowerCase().includes(searchTerm) ||
+                product.category.toLowerCase().includes(searchTerm)
+            );
+            displayProducts(filteredProducts);
+        });
+
+        // Sort Products
+        sortDropdown.addEventListener('change', () => {
+            const sortValue = sortDropdown.value;
+            let sortedProducts = [...products];
+            if (sortValue === 'low-high') {
+                sortedProducts.sort((a, b) => a.price - b.price);
+            } else if (sortValue === 'high-low') {
+                sortedProducts.sort((a, b) => b.price - a.price);
+            }
+            displayProducts(sortedProducts);
+        });
+
+        // Filter Products by Category
+        filterDropdown.addEventListener('change', () => {
+            const filterValue = filterDropdown.value;
+            const filteredProducts = filterValue === 'all' ? products : products.filter(product => product.category === filterValue);
+            displayProducts(filteredProducts);
+        });
+
+        // Pagination Controls
+        prevPage.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                displayProducts(products);
+            }
+        });
+
+        nextPage.addEventListener('click', () => {
+            if (currentPage * productsPerPage < products.length) {
+                currentPage++;
+                displayProducts(products);
+            }
+        });
+
+        // Add Product
+        addProductBtn.addEventListener('click', () => {
+            modalTitle.textContent = 'Add Product';
+            productForm.reset();
+            productModal.classList.remove('hidden');
+            productIdInput.value = ''; // Clear productId for adding a new product
+        });
+
+        // Close Modal
+        closeModal.addEventListener('click', () => {
+            productModal.classList.add('hidden');
+        });
+
+        // Delete Product
+        productTableBody.addEventListener('click', (event) => {
+            if (event.target.classList.contains('deleteProductBtn')) {
+                const productId = parseInt(event.target.dataset.id);
+                products = products.filter(product => product.id !== productId);
+                displayProducts(products);
+            }
+        });
+
+        // Edit Product
+        productTableBody.addEventListener('click', (event) => {
+            if (event.target.classList.contains('editProductBtn')) {
+                const productId = parseInt(event.target.dataset.id);
+                const productToEdit = products.find(product => product.id === productId);
+
+                if (productToEdit) {
+                    modalTitle.textContent = 'Edit Product';
+                    productIdInput.value = productToEdit.id;
+                    productNameInput.value = productToEdit.name;
+                    productPriceInput.value = productToEdit.price;
+                    productCategoryInput.value = productToEdit.category;
+                    productOrderInput.value = productToEdit.order;
+
+                    productModal.classList.remove('hidden');
+                }
+            }
+        });
+
+        // Save Product
+        productForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent form submission
+
+            const id = productIdInput.value ? parseInt(productIdInput.value) : null;
+            const name = productNameInput.value;
+            const price = parseFloat(productPriceInput.value);
+            const category = productCategoryInput.value;
+            const order = parseInt(productOrderInput.value);
+
+            if (id) {
+                // Edit existing product
+                const index = products.findIndex(product => product.id === id);
+                products[index] = { id, name, price, category, order };
+            } else {
+                // Add new product
+                const newProduct = { id: products.length + 1, name, price, category, order };
+                products.push(newProduct);
+            }
+
+            displayProducts(products);
+            productModal.classList.add('hidden'); // Close modal
+            productForm.reset(); // Reset form fields
+        });
+
+        // Initial Fetch of Products
+        fetchProducts();
+    </script>
+
+
+</body>
+
+</html>
