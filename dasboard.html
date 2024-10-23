@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Dashboard</title>
+    <link rel="stylesheet" href="public/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- Add FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+
+<body class="bg-gray-100">
+
+    <div class="flex">
+
+        <!-- Left Sidebar -->
+        <div id="left" class="w-[15%] bg-gray-200 p-4 shadow-md min-h-screen flex flex-col">
+            <div class="text-2xl font-bold mb-4 border-b-2 border-gray-400 w-full">Auction 1</div>
+            <ul class="space-y-2 flex-grow">
+                <li>
+                    <a id="dashboardLink" href="dasboard.html" class="text-black block px-4 py-2 rounded-lg">
+                        <i class="fas fa-home" aria-hidden="true"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a id="productLink" href="product.html" class="text-black block px-4 py-2 rounded-lg">
+                        <i class="fas fa-copy" aria-hidden="true"></i> Products
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Container -->
+        <div id="right" class="w-[85%] px-4 w-full bg-gray-200">
+            <div class="m-2 p-4 bg-white border border-gray-300 rounded-lg min-h-screen">
+                <h1 class="text-3xl">Welcome to Dashboard</h1>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        // JavaScript to highlight the active link
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentLocation = window.location.href; // Get the current URL
+            const dashboardLink = document.getElementById('dashboardLink');
+            const productLink = document.getElementById('productLink');
+
+            // Check if the current URL contains "dasboard.html" (for Dashboard)
+            if (currentLocation.includes('dasboard.html')) {
+                dashboardLink.classList.add('bg-gradient-to-r', 'from-amber-500', 'to-gray-200');
+                dashboardLink.classList.add('text-black'); // Optional: Change text color for active link
+            }
+
+            // Check if the current URL contains "product.html" (for Products)
+            if (currentLocation.includes('product.html')) {
+                productLink.classList.add('bg-gradient-to-r', 'from-amber-500', 'to-gray-200');
+                productLink.classList.add('text-black'); // Optional: Change text color for active link
+            }
+        });
+
+    </script>
+
+
+</body>
+
+</html>
