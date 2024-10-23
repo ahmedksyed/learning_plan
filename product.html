@@ -173,22 +173,6 @@
             }
         }
 
-        // // Show 10 Skeleton Loading Rows
-        // function showSkeletonLoading() {
-        //     productTableBody.innerHTML = ''; // Clear existing rows
-
-        //     for (let i = 0; i < 10; i++) {
-        //         const row = document.createElement('tr');
-        //         row.innerHTML = Array(5).fill(`
-        //     <td class="border-b px-4 py-2">
-        //         <div class="h-4 bg-gray-200 rounded animate-pulse"></div>
-        //     </td>
-        // `).join(''); // Create 5 cells for each row
-        //         productTableBody.appendChild(row);
-        //     }
-        // }
-
-
         // Display Products with Correct Pagination Calculation
         function displayProducts(productArray) {
             productTableBody.innerHTML = '';
